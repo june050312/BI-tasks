@@ -1,0 +1,79 @@
+.divide {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    margin-top: 5%;
+    width: 90%;
+    border: 10px solid coral;
+    border-radius: 32px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#register {
+    height: 45%;
+}
+
+#user {
+    height: fit-content;
+}
+
+.title {
+    margin-top: 16px;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.register-form>* {
+    margin-top: 32px;
+    height: 56px;
+    background-color: white;
+    border: 2px solid coral;
+    border-radius: 16px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.register-form>input {
+    width: 100%;
+}
+
+.register-form>button {
+    width: 50%;
+}
+
+.user {
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid coral;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.user>* {
+    margin: 16px;
+}
+
+.user-value>button {
+    width: 48px;
+    height: 32px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 16px;
+    background-color: white;
+    border: 2px solid coral;
+    border-radius: 8px;
+}
