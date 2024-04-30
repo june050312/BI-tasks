@@ -4,6 +4,25 @@
     justify-content: center;
 }
 
+.userdata-container {
+    margin: auto auto;
+    border: 10px solid coral;
+    border-radius: 32px;
+    width: 600px;
+    height: 800px;
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.userdata-container>h1 {
+    text-align: center;
+}
+
+.userdata-container>* {
+    margin-left: 32px;
+    margin-bottom: 64px;
+}
+
 .container {
     margin-top: 5%;
     width: 90%;

@@ -4,13 +4,13 @@ import './index.css';
 import Register from './Register';
 import User from './User';
 import reportWebVitals from './reportWebVitals';
+import UserData from './UserData';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <div className='body'>
-      <Register />
-      <User />
+      <UserData />
     </div>
   </React.StrictMode>
 );
