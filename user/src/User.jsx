@@ -7,11 +7,11 @@ function User() {
             <div className="container" id="user">
                 <div className="title">유저</div>
                 <div className="user">
-                    <div>아이디</div>
-                    <form action="" className="user-value">
+                    <a href="/">{}</a>
+                    <div className="user-value">
                         <button>수정</button>
                         <button>삭제</button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

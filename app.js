@@ -1,5 +1,4 @@
 const express = require("express");
-const methodOverride = require("method-override");
 
 const app = express();
 
@@ -8,10 +7,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
-app.use(methodOverride("_method"));
+app.use("/", require("./routes/main"));
 
-app.use("/user", require("./routes"));
-
-app.listen(3000, () => {
-    console.log("App listening on port 3000");
+app.listen(4000, () => {
+    console.log("App listening on port 4000");
 })

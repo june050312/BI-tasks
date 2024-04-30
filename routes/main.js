@@ -4,20 +4,11 @@ const asyncHandler = require("express-async-handler");
 
 const DB = [
     {
-        id: "admin",
-        pw: "1234"
-    },
-    {
-        id: "LinZaoMing",
-        pw: "LZM666666"
-    },
-    {
-        id: "ZohnChina",
-        pw: "BingChiling"
-    },
-    {
-        id: "IkuyoKita",
-        pw: "KitaKita"
+        name: "admin",
+        email: "admin@abc.com",
+        password: "1234",
+        age: 20,
+        createdAt: 20240430
     }
 ]
 
