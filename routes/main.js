@@ -14,7 +14,9 @@ const DB = [
 
 // POST /
 route.post("/", asyncHandler((req, res) => {
-    res.send("post")
+    const userData = req.body
+
+    console.log(userData)
 }))
 
 // GET /
