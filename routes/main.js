@@ -2,21 +2,14 @@ const express = require("express");
 const route = express.Router();
 const asyncHandler = require("express-async-handler");
 
-const DB = [
-    {
-        name: "admin",
-        email: "admin@abc.com",
-        password: "1234",
-        age: 20,
-        createdAt: 20240430
-    }
-]
+const DB = []
 
 // POST /
 route.post("/", asyncHandler((req, res) => {
     const userData = req.body
+    DB.push(userData)
 
-    console.log(userData)
+    console.log(DB)
 }))
 
 // GET /

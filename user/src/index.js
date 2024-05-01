@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
-import Register from './Register';
 import User from './User';
 import reportWebVitals from './reportWebVitals';
 import UserData from './UserData';
@@ -9,9 +9,12 @@ import UserData from './UserData';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <div className='body'>
-      <UserData />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/user' element={<User />} />
+        <Route path='/user/:id' element={<UserData />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

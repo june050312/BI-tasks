@@ -1,3 +1,10 @@
+.body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background-color: white;
+}
+
 .divide {
     width: 50%;
     display: flex;
