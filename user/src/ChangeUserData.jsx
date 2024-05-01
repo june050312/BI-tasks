@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom"
 import "./style.css"
 
-function UserData() {
+function ChangeUserData() {
     const params = useParams();
     const username = params.name;
 
@@ -36,25 +36,25 @@ function UserData() {
                     <div>:</div>
                     <div>:</div>
                 </div>
-                <div className="userdata">
+                <div className="modify-form">
                     {DB.map(data => (
                         <>
-                            <div>{ username }</div>
-                            <div>{ data.email }</div>
-                            <div>{ data.password }</div>
-                            <div>{ data.age }</div>
-                            <div>{ data.createdAt }</div>
+                            <input type="text" value={ username } />
+                            <input type="text" value={ data.email } />
+                            <input type="text" value={ data.password } />
+                            <input type="text" value={ data.age } />
+                            <input type="text" value={ data.createdAt } />
                         </>
                     ))}
                 </div>
             </div>
             <div className="navigator">
                 <Link to="/user">뒤로가기</Link>
-                <Link to="/user">수정하기</Link>
+                <Link to="/user">변경하기</Link>
                 <Link to="/user">삭제하기</Link>
             </div>
         </div>
     )
 }
 
-export default UserData;
+export default ChangeUserData;

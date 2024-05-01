@@ -3,8 +3,6 @@ import React from "react";
 import RegisterForm from "./RegisterForm";
 
 function Register() {
-    
-
     return (
         <div className="divide">
             <div className="container" id="register">

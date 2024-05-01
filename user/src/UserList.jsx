@@ -3,14 +3,14 @@ import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
 function UserList() {
-    const [DB, setDB] = useState([]);
-
+    const [ DB, setDB ] = useState([])
+    
     useEffect(() => {
         fetchDB();
-    }, []);
+    }, [DB]);
 
     const fetchDB = async () => {
-        const res = await fetch("/user", { method: 'GET' });
+        const res = await fetch("http://localhost:4000/user", { method: 'GET' });
         const resDB = await res.json();
         setDB(resDB);
     }
@@ -19,15 +19,15 @@ function UserList() {
         <div className="divide">
             <div className="container" id="user">
                 <div className="title">유저</div>
-                {DB.map(data => {
+                {DB.map(data => (
                     <div className="user">
-                        <Link to="/user">{data.name}</Link>
+                        <Link to={`/user/${ data.name }`}>{ data.name }</Link>
                         <div className="user-value">
                             <button>수정</button>
                             <button>삭제</button>
                         </div>
                     </div>
-                })}
+                ))}
             </div>
         </div>
     )

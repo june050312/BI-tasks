@@ -17,7 +17,7 @@
     border-radius: 32px;
     width: 600px;
     height: 800px;
-    font-weight: bold;
+    margin-top: 16px;
     font-size: 32px;
 }
 
@@ -27,7 +27,27 @@
 
 .userdata-container>* {
     margin-left: 32px;
+}
+
+.content-container {
+    display: flex;
+    margin-left: 48px;
+}
+
+.content-container>div>div {
+    margin-top: 16px;
+    margin-right: 32px;
     margin-bottom: 64px;
+}
+
+.content-container input {
+    display: block;
+    height: 32px;
+    margin-bottom: 64px;
+}
+
+.modify-form {
+    margin-top: 16px;
 }
 
 .container {
@@ -44,6 +64,18 @@
 .title {
     margin-top: 16px;
     font-size: 48px;
+    font-weight: bold;
+}
+
+#user>.title {
+    margin-bottom: 16px;
+}
+
+.navigator {
+    display: flex;
+    margin-top: 8px;
+    margin-right: 32px;
+    justify-content: space-around;
     font-weight: bold;
 }
 

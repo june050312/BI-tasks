@@ -5,6 +5,7 @@ import './index.css';
 import User from './User';
 import reportWebVitals from './reportWebVitals';
 import UserData from './UserData';
+import ChangeUserData from './ChangeUserData';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -12,7 +13,8 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path='/user' element={<User />} />
-        <Route path='/user/:id' element={<UserData />} />
+        <Route path='/user/:name' element={<UserData />} />
+        <Route path='/user/modify/:name' element={<ChangeUserData />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

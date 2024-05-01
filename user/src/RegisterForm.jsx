@@ -10,13 +10,13 @@ function RegisterForm() {
     let date = new Date()
 
     const onSubmit = () => {
-    const userData = {
-        name: username,
-        email: email,
-        password: password,
-        age: age,
-        createdAt: date.getTime()
-    }
+        const userData = {
+            name: username,
+            email: email,
+            password: password,
+            age: age,
+            createdAt: date.getTime()
+        }
 
         fetch("http://localhost:4000/user", {
             method: "post", 
