@@ -23,8 +23,7 @@ function UserList() {
                     <div className="user">
                         <Link to={`/user/${ data.name }`}>{ data.name }</Link>
                         <div className="user-value">
-                            <button>수정</button>
-                            <button>삭제</button>
+                            <div><Link to={`/user/modify/${ data.name }`}>수정</Link></div>
                         </div>
                     </div>
                 ))}

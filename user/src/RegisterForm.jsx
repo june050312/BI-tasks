@@ -25,14 +25,19 @@ function RegisterForm() {
             },
             body: JSON.stringify(userData),
         })
+
+        setName("")
+        setEmail("")
+        setPassword("")
+        setAge("")
     }
 
     return (
         <div className="register-form">
-            <input name="username" type="text" placeholder="이름" onChange={ (e) => setName(e.target.value) } />
-            <input name="email" type="email" placeholder="이메일" onChange={ (e) => setEmail(e.target.value) } />
-            <input name="password" type="password" placeholder="비밀번호" onChange={ (e) => setPassword(e.target.value) } />
-            <input name="age" type="text" placeholder="나이" onChange={ (e) => setAge(e.target.value) } />
+            <input name="username" type="text" placeholder="이름" value={username} onChange={ (e) => setName(e.target.value) } />
+            <input name="email" type="email" placeholder="이메일" value={email} onChange={ (e) => setEmail(e.target.value) } />
+            <input name="password" type="password" placeholder="비밀번호" value={password} onChange={ (e) => setPassword(e.target.value) } />
+            <input name="age" type="text" placeholder="나이" value={age} onChange={ (e) => setAge(e.target.value) } />
             <button onClick={ onSubmit }>확인</button>
         </div>
     )

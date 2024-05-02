@@ -4,23 +4,66 @@ import "./style.css"
 
 function ChangeUserData() {
     const params = useParams();
-    const username = params.name;
+    const userName = params.name;
+
+    const [ username, setName ] = useState("")
+    const [ email, setEmail ] = useState("")
+    const [ password, setPassword ] = useState("")
+    const [ age, setAge ] = useState("")
 
     const [ DB, setDB ] = useState([]);
+
+    let date = new Date()
+
+    const onSubmit = () => {
+        const userData = {
+            name: username,
+            email: email,
+            password: password,
+            age: age,
+            createdAt: date.getTime()
+        }
+
+        fetch(`http://localhost:4000/user/modify/${userName}`, {
+            method: "put", 
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(userData),
+        })
+    }
+
+    const onDelete = () => {
+        const userData = {
+            name: username,
+            email: email,
+            password: password,
+            age: age,
+            createdAt: date.getTime()
+        }
+
+        fetch(`http://localhost:4000/user/${userName}`, {
+            method: "delete", 
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(userData),
+        })
+    }
     
     useEffect(() => {
         fetchDB();
     }, []);
 
     const fetchDB = async () => {
-        const res = await fetch(`http://localhost:4000/user/${username}`, { method: 'GET' });
+        const res = await fetch(`http://localhost:4000/user/${userName}`, { method: 'GET' });
         const resDB = await res.json();
         setDB(resDB);
     }
 
     return (
         <div className="userdata-container">
-            <h1>{ username }</h1>
+            <h1>{ userName }</h1>
             <div className="content-container">
                 <div>
                     <div>이름</div>
@@ -39,19 +82,19 @@ function ChangeUserData() {
                 <div className="modify-form">
                     {DB.map(data => (
                         <>
-                            <input type="text" value={ username } />
-                            <input type="text" value={ data.email } />
-                            <input type="text" value={ data.password } />
-                            <input type="text" value={ data.age } />
-                            <input type="text" value={ data.createdAt } />
+                            <input type="text" defaultValue={ userName } onChange={ (e) => { setName(e.target.value) } }/>
+                            <input type="text" defaultValue={ data.email } onChange={ (e) => { setEmail(e.target.value) } }/>
+                            <input type="text" defaultValue={ data.password } onChange={ (e) => { setPassword(e.target.value) } }/>
+                            <input type="text" defaultValue={ data.age } onChange={ (e) => { setAge(e.target.value) } }/>
+                            <div>{ data.createdAt }</div>
                         </>
                     ))}
                 </div>
             </div>
             <div className="navigator">
-                <Link to="/user">뒤로가기</Link>
-                <Link to="/user">변경하기</Link>
-                <Link to="/user">삭제하기</Link>
+                <Link to={`/user/${userName}`}>뒤로가기</Link>
+                <Link to="/user" onClick={ onSubmit }>변경하기</Link>
+                <Link to="/user" onClick={ onDelete }>삭제하기</Link>
             </div>
         </div>
     )

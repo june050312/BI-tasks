@@ -4,23 +4,48 @@ import "./style.css"
 
 function UserData() {
     const params = useParams();
-    const username = params.name;
+    const userName = params.name;
 
     const [ DB, setDB ] = useState([]);
+
+    const [ username, setName ] = useState("")
+    const [ email, setEmail ] = useState("")
+    const [ password, setPassword ] = useState("")
+    const [ age, setAge ] = useState("")
+
+    const date = new Date()
     
     useEffect(() => {
         fetchDB();
-    }, []);
+    }, [DB]);
 
     const fetchDB = async () => {
-        const res = await fetch(`http://localhost:4000/user/${username}`, { method: 'GET' });
+        const res = await fetch(`http://localhost:4000/user/${userName}`, { method: 'GET' });
         const resDB = await res.json();
         setDB(resDB);
     }
 
+    const onDelete = () => {
+        const userData = {
+            name: username,
+            email: email,
+            password: password,
+            age: age,
+            createdAt: date.getTime()
+        }
+
+        fetch(`http://localhost:4000/user/${userName}`, {
+            method: "delete", 
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(userData),
+        })
+    }
+
     return (
         <div className="userdata-container">
-            <h1>{ username }</h1>
+            <h1>{ userName }</h1>
             <div className="content-container">
                 <div>
                     <div>이름</div>
@@ -39,7 +64,7 @@ function UserData() {
                 <div className="userdata">
                     {DB.map(data => (
                         <>
-                            <div>{ username }</div>
+                            <div>{ userName }</div>
                             <div>{ data.email }</div>
                             <div>{ data.password }</div>
                             <div>{ data.age }</div>
@@ -50,8 +75,8 @@ function UserData() {
             </div>
             <div className="navigator">
                 <Link to="/user">뒤로가기</Link>
-                <Link to="/user">수정하기</Link>
-                <Link to="/user">삭제하기</Link>
+                <Link to={`/user/modify/${userName}`}>수정하기</Link>
+                <Link to="/user" onClick={ onDelete }>삭제하기</Link>
             </div>
         </div>
     )

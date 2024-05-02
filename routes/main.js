@@ -42,6 +42,35 @@ route.get("/:name", asyncHandler((req, res) => {
     res.send(thisUser)
 }))
 
-// PUT /:name
+// PUT modify/:name
+route.put("/modify/:name", asyncHandler((req, res) => {
+    const userName = req.params.name;
+    const thisUser = DB.filter(data => data.name.includes(userName))
+    const thisIndex = thisUser.createdAt
+    
+    thisUser[0].name = req.body.name
+    thisUser[0].email = req.body.email
+    thisUser[0].password = req.body.password
+    thisUser[0].age = req.body.age
+    thisUser[0].createdAt = req.body.createdAt
+
+    DB.forEach((data, i) => {
+        if (data.createdAt == thisIndex) {
+            DB.splice(i, 1, thisUser)
+        }
+    })
+}))
+
+// DELETE /:name
+route.delete("/:name", asyncHandler((req, res) => {
+    const userName = req.params.name;
+    const thisUser = DB.filter(data => data.name.includes(userName))
+
+    DB.forEach((data, i) => {
+        if (data.name == thisUser[0].name && data.password == thisUser[0].password) {
+            DB.splice(i, 1)
+        }
+    })
+}))
 
 module.exports = route;
