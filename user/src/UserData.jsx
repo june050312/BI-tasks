@@ -8,10 +8,10 @@ function UserData() {
 
     const [ DB, setDB ] = useState([]);
 
-    const [ username, setName ] = useState("")
-    const [ email, setEmail ] = useState("")
-    const [ password, setPassword ] = useState("")
-    const [ age, setAge ] = useState("")
+    const [ username ] = useState("")
+    const [ email ] = useState("")
+    const [ password ] = useState("")
+    const [ age ] = useState("")
 
     const date = new Date()
     
@@ -52,7 +52,7 @@ function UserData() {
                     <div>이메일</div>
                     <div>비밀번호</div>
                     <div>나이</div>
-                    <div>생성시간</div>
+                    <div>수정시간</div>
                 </div>
                 <div>
                     <div>:</div>

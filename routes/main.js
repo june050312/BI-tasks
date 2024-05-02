@@ -2,6 +2,13 @@ const express = require("express");
 const route = express.Router();
 const asyncHandler = require("express-async-handler");
 
+function isEmpty(str){
+    if(typeof str == "undefined" || str == null || str == "")
+        return true;
+    else
+        return false ;
+}
+
 const DB = [
     {
         name: "admin",
@@ -47,12 +54,15 @@ route.put("/modify/:name", asyncHandler((req, res) => {
     const userName = req.params.name;
     const thisUser = DB.filter(data => data.name.includes(userName))
     const thisIndex = thisUser.createdAt
-    
-    thisUser[0].name = req.body.name
-    thisUser[0].email = req.body.email
-    thisUser[0].password = req.body.password
-    thisUser[0].age = req.body.age
+
+    isEmpty(req.body.name) ? thisUser[0].name : thisUser[0].name = req.body.name
+    isEmpty(req.body.email) ? thisUser[0].email : thisUser[0].email = req.body.email
+    isEmpty(req.body.password) ? thisUser[0].password : thisUser[0].password = req.body.password
+    isEmpty(req.body.age) ? thisUser[0].age : thisUser[0].age = req.body.age
+
     thisUser[0].createdAt = req.body.createdAt
+
+    console.log(thisUser)
 
     DB.forEach((data, i) => {
         if (data.createdAt == thisIndex) {
