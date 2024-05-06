@@ -4,7 +4,7 @@ import "./style.css"
 
 function ChangeUserData() {
     const params = useParams();
-    const userName = params.name;
+    const userId = params.id;
 
     const [ username, setName ] = useState("")
     const [ email, setEmail ] = useState("")
@@ -12,15 +12,13 @@ function ChangeUserData() {
     const [ age, setAge ] = useState("")
 
     const [ DB, setDB ] = useState([]);
-
-    let date = new Date()
     
     useEffect(() => {
         fetchDB();
     }, []);
 
     const fetchDB = async () => {
-        const res = await fetch(`http://localhost:4000/user/${userName}`, { method: 'GET' });
+        const res = await fetch(`http://localhost:4000/user/${ userId }`, { method: 'GET' });
         const resDB = await res.json();
         setDB(resDB);
     }
@@ -31,10 +29,10 @@ function ChangeUserData() {
             email: email,
             password: password,
             age: age,
-            createdAt: date.getTime()
+            createdAt: DB.createdAt
         }
 
-        fetch(`http://localhost:4000/user/${userName}`, {
+        fetch(`http://localhost:4000/user/${ userId }`, {
             method: "put", 
             headers: {
                 "content-type": "application/json",
@@ -45,14 +43,10 @@ function ChangeUserData() {
 
     const onDelete = () => {
         const userData = {
-            name: username,
-            email: email,
-            password: password,
-            age: age,
-            createdAt: date.getTime()
+            createdAt: DB.createdAt
         }
 
-        fetch(`http://localhost:4000/user/${userName}`, {
+        fetch(`http://localhost:4000/user/${ userId }`, {
             method: "delete", 
             headers: {
                 "content-type": "application/json",
@@ -63,7 +57,7 @@ function ChangeUserData() {
 
     return (
         <div className="userdata-container">
-            <h1>{ userName }</h1>
+            <h1>{ DB.name }</h1>
             <div className="content-container">
                 <div>
                     <div>이름</div>
@@ -80,21 +74,15 @@ function ChangeUserData() {
                     <div>:</div>
                 </div>
                 <div className="modify-form">
-                    { 
-                        DB.map(data => (
-                            <>
-                                <input type="text" defaultValue={ userName } onChange={ (e) => { setName(e.target.value) } }/>
-                                <input type="text" defaultValue={ data.email } onChange={ (e) => { setEmail(e.target.value) } }/>
-                                <input type="text" defaultValue={ data.password } onChange={ (e) => { setPassword(e.target.value) } }/>
-                                <input type="text" defaultValue={ data.age } onChange={ (e) => { setAge(e.target.value) } }/>
-                                <div>{ data.createdAt }</div>
-                            </>
-                        )) 
-                    }
+                    <input type="text" defaultValue={ DB.name } onChange={ (e) => { setName(e.target.value) } }/>
+                    <input type="text" defaultValue={ DB.email } onChange={ (e) => { setEmail(e.target.value) } }/>
+                    <input type="text" defaultValue={ DB.password } onChange={ (e) => { setPassword(e.target.value) } }/>
+                    <input type="text" defaultValue={ DB.age } onChange={ (e) => { setAge(e.target.value) } }/>
+                    <div>{ DB.createdAt }</div>
                 </div>
             </div>
             <div className="navigator">
-                <Link to={`/user/${ userName }`}>뒤로가기</Link>
+                <Link to={`/user/${ userId }`}>뒤로가기</Link>
                 <Link to="/user" onClick={ onSubmit }>변경하기</Link>
                 <Link to="/user" onClick={ onDelete }>삭제하기</Link>
             </div>

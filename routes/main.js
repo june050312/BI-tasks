@@ -36,27 +36,23 @@ route.get("/", asyncHandler((req, res) => {
 route.get("/:id", asyncHandler((req, res) => {
     const userId = req.params.id;
     const thisUser = DB.filter(data => data.createdAt == userId)
-    res.json(thisUser)
+    res.json(...thisUser)
 }))
 
 // PUT /:id
 route.put("/:id", asyncHandler((req, res) => {
     const userId = req.params.id;
     const thisUser = DB.filter(data => data.createdAt == userId)
-    const thisIndex = thisUser.createdAt
 
-    isEmpty(req.body.name) ? thisUser[0].name : thisUser[0].name = req.body.name
-    isEmpty(req.body.email) ? thisUser[0].email : thisUser[0].email = req.body.email
-    isEmpty(req.body.password) ? thisUser[0].password : thisUser[0].password = req.body.password
-    isEmpty(req.body.age) ? thisUser[0].age : thisUser[0].age = req.body.age
+    for (let prop of ["name", "email", "password", "age"]) {
+        isEmpty(req.body[prop]) ? thisUser[0][prop] : thisUser[0][prop] = req.body[prop]
+    }
 
     thisUser[0].createdAt = req.body.createdAt
 
-    console.log(thisUser)
-
     DB.forEach((data, i) => {
-        if (data.createdAt == thisIndex) {
-            DB.splice(i, 1, thisUser)
+        if (data.createdAt == userId) {
+            DB.splice(i, 1, ...thisUser)
         }
     })
 }))
@@ -64,10 +60,9 @@ route.put("/:id", asyncHandler((req, res) => {
 // DELETE /:id
 route.delete("/:id", asyncHandler((req, res) => {
     const userId = req.params.id;
-    const thisUser = DB.filter(data => data.createdAt == userId)
 
     DB.forEach((data, i) => {
-        if (data.name == thisUser[0].name && data.password == thisUser[0].password) {
+        if (data.createdAt == userId) {
             DB.splice(i, 1)
         }
     })

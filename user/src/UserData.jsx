@@ -7,13 +7,6 @@ function UserData() {
     const userId = params.id;
 
     const [ DB, setDB ] = useState([]);
-
-    const [ username ] = useState("")
-    const [ email ] = useState("")
-    const [ password ] = useState("")
-    const [ age ] = useState("")
-
-    const date = new Date()
     
     useEffect(() => {
         fetchDB();
@@ -27,11 +20,7 @@ function UserData() {
 
     const onDelete = () => {
         const userData = {
-            name: username,
-            email: email,
-            password: password,
-            age: age,
-            createdAt: date.getTime()
+            createdAt: DB.createdAt
         }
 
         fetch(`http://localhost:4000/user/${ userId }`, {
@@ -45,7 +34,7 @@ function UserData() {
 
     return (
         <div className="userdata-container">
-            <h1>{ userId }</h1>
+            <h1>{ DB.name }</h1>
             <div className="content-container">
                 <div>
                     <div>이름</div>
@@ -62,17 +51,11 @@ function UserData() {
                     <div>:</div>
                 </div>
                 <div className="userdata">
-                    { 
-                        DB.map(data => (
-                            <>
-                                <div>{ userId }</div>
-                                <div>{ data.email }</div>
-                                <div>{ data.password }</div>
-                                <div>{ data.age }</div>
-                                <div>{ data.createdAt }</div>
-                            </>
-                        )) 
-                    }
+                    <div>{ DB.name }</div>
+                    <div>{ DB.email }</div>
+                    <div>{ DB.password }</div>
+                    <div>{ DB.age }</div>
+                    <div>{ DB.createdAt }</div>
                 </div>
             </div>
             <div className="navigator">
