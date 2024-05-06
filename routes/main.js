@@ -49,8 +49,8 @@ route.get("/:name", asyncHandler((req, res) => {
     res.send(thisUser)
 }))
 
-// PUT modify/:name
-route.put("/modify/:name", asyncHandler((req, res) => {
+// PUT /:name
+route.put("/:name", asyncHandler((req, res) => {
     const userName = req.params.name;
     const thisUser = DB.filter(data => data.name.includes(userName))
     const thisIndex = thisUser.createdAt

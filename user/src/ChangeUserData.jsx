@@ -24,7 +24,7 @@ function ChangeUserData() {
             createdAt: date.getTime()
         }
 
-        fetch(`http://localhost:4000/user/modify/${userName}`, {
+        fetch(`http://localhost:4000/user/${userName}`, {
             method: "put", 
             headers: {
                 "content-type": "application/json",
