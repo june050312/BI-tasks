@@ -12,9 +12,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path='/user' element={<User />} />
-        <Route path='/user/:name' element={<UserData />} />
-        <Route path='/user/modify/:name' element={<ChangeUserData />} />
+        <Route path='/user' element={ <User /> } />
+        <Route path='/user/:id' element={ <UserData /> } />
+        <Route path='/user/modify/:id' element={ <ChangeUserData /> } />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

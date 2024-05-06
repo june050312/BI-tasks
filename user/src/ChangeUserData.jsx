@@ -14,6 +14,16 @@ function ChangeUserData() {
     const [ DB, setDB ] = useState([]);
 
     let date = new Date()
+    
+    useEffect(() => {
+        fetchDB();
+    }, []);
+
+    const fetchDB = async () => {
+        const res = await fetch(`http://localhost:4000/user/${userName}`, { method: 'GET' });
+        const resDB = await res.json();
+        setDB(resDB);
+    }
 
     const onSubmit = () => {
         const userData = {
@@ -50,16 +60,6 @@ function ChangeUserData() {
             body: JSON.stringify(userData),
         })
     }
-    
-    useEffect(() => {
-        fetchDB();
-    }, []);
-
-    const fetchDB = async () => {
-        const res = await fetch(`http://localhost:4000/user/${userName}`, { method: 'GET' });
-        const resDB = await res.json();
-        setDB(resDB);
-    }
 
     return (
         <div className="userdata-container">
@@ -80,19 +80,21 @@ function ChangeUserData() {
                     <div>:</div>
                 </div>
                 <div className="modify-form">
-                    {DB.map(data => (
-                        <>
-                            <input type="text" defaultValue={ userName } onChange={ (e) => { setName(e.target.value) } }/>
-                            <input type="text" defaultValue={ data.email } onChange={ (e) => { setEmail(e.target.value) } }/>
-                            <input type="text" defaultValue={ data.password } onChange={ (e) => { setPassword(e.target.value) } }/>
-                            <input type="text" defaultValue={ data.age } onChange={ (e) => { setAge(e.target.value) } }/>
-                            <div>{ data.createdAt }</div>
-                        </>
-                    ))}
+                    { 
+                        DB.map(data => (
+                            <>
+                                <input type="text" defaultValue={ userName } onChange={ (e) => { setName(e.target.value) } }/>
+                                <input type="text" defaultValue={ data.email } onChange={ (e) => { setEmail(e.target.value) } }/>
+                                <input type="text" defaultValue={ data.password } onChange={ (e) => { setPassword(e.target.value) } }/>
+                                <input type="text" defaultValue={ data.age } onChange={ (e) => { setAge(e.target.value) } }/>
+                                <div>{ data.createdAt }</div>
+                            </>
+                        )) 
+                    }
                 </div>
             </div>
             <div className="navigator">
-                <Link to={`/user/${userName}`}>뒤로가기</Link>
+                <Link to={`/user/${ userName }`}>뒤로가기</Link>
                 <Link to="/user" onClick={ onSubmit }>변경하기</Link>
                 <Link to="/user" onClick={ onDelete }>삭제하기</Link>
             </div>

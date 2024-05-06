@@ -7,7 +7,7 @@ function UserList() {
     
     useEffect(() => {
         fetchDB();
-    }, [DB]);
+    }, [ DB ]);
 
     const fetchDB = async () => {
         const res = await fetch("http://localhost:4000/user", { method: 'GET' });
@@ -19,14 +19,16 @@ function UserList() {
         <div className="divide">
             <div className="container" id="user">
                 <div className="title">유저</div>
-                {DB.map(data => (
-                    <div className="user">
-                        <Link to={`/user/${ data.name }`}>{ data.name }</Link>
-                        <div className="user-value">
-                            <div><Link to={`/user/modify/${ data.name }`}>수정</Link></div>
+                { 
+                    DB.map(data => (
+                        <div className="user">
+                            <Link to={`/user/${ data.createdAt }`}>{ data.name }</Link>
+                            <div className="user-value">
+                                <div><Link to={`/user/modify/${ data.createdAt }`}>수정</Link></div>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    )) 
+                }
             </div>
         </div>
     )

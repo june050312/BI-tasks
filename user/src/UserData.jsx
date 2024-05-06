@@ -4,7 +4,7 @@ import "./style.css"
 
 function UserData() {
     const params = useParams();
-    const userName = params.name;
+    const userId = params.id;
 
     const [ DB, setDB ] = useState([]);
 
@@ -17,10 +17,10 @@ function UserData() {
     
     useEffect(() => {
         fetchDB();
-    }, [DB]);
+    }, []);
 
     const fetchDB = async () => {
-        const res = await fetch(`http://localhost:4000/user/${userName}`, { method: 'GET' });
+        const res = await fetch(`http://localhost:4000/user/${ userId }`, { method: 'GET' });
         const resDB = await res.json();
         setDB(resDB);
     }
@@ -34,7 +34,7 @@ function UserData() {
             createdAt: date.getTime()
         }
 
-        fetch(`http://localhost:4000/user/${userName}`, {
+        fetch(`http://localhost:4000/user/${ userId }`, {
             method: "delete", 
             headers: {
                 "content-type": "application/json",
@@ -45,7 +45,7 @@ function UserData() {
 
     return (
         <div className="userdata-container">
-            <h1>{ userName }</h1>
+            <h1>{ userId }</h1>
             <div className="content-container">
                 <div>
                     <div>이름</div>
@@ -62,20 +62,22 @@ function UserData() {
                     <div>:</div>
                 </div>
                 <div className="userdata">
-                    {DB.map(data => (
-                        <>
-                            <div>{ userName }</div>
-                            <div>{ data.email }</div>
-                            <div>{ data.password }</div>
-                            <div>{ data.age }</div>
-                            <div>{ data.createdAt }</div>
-                        </>
-                    ))}
+                    { 
+                        DB.map(data => (
+                            <>
+                                <div>{ userId }</div>
+                                <div>{ data.email }</div>
+                                <div>{ data.password }</div>
+                                <div>{ data.age }</div>
+                                <div>{ data.createdAt }</div>
+                            </>
+                        )) 
+                    }
                 </div>
             </div>
             <div className="navigator">
                 <Link to="/user">뒤로가기</Link>
-                <Link to={`/user/modify/${userName}`}>수정하기</Link>
+                <Link to={`/user/modify/${ userId }`}>수정하기</Link>
                 <Link to="/user" onClick={ onDelete }>삭제하기</Link>
             </div>
         </div>

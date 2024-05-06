@@ -32,27 +32,17 @@ route.get("/", asyncHandler((req, res) => {
     res.send(DB)
 }))
 
-// PUT /
-route.put("/", asyncHandler((req, res) => {
-    res.send("put")
+// GET /:id
+route.get("/:id", asyncHandler((req, res) => {
+    const userId = req.params.id;
+    const thisUser = DB.filter(data => data.createdAt == userId)
+    res.json(thisUser)
 }))
 
-// DELETE /
-route.delete("/", asyncHandler((req, res) => {
-    res.send("delete")
-}))
-
-// GET /:name
-route.get("/:name", asyncHandler((req, res) => {
-    const userName = req.params.name;
-    const thisUser = DB.filter(data => data.name.includes(userName))
-    res.send(thisUser)
-}))
-
-// PUT /:name
-route.put("/:name", asyncHandler((req, res) => {
-    const userName = req.params.name;
-    const thisUser = DB.filter(data => data.name.includes(userName))
+// PUT /:id
+route.put("/:id", asyncHandler((req, res) => {
+    const userId = req.params.id;
+    const thisUser = DB.filter(data => data.createdAt == userId)
     const thisIndex = thisUser.createdAt
 
     isEmpty(req.body.name) ? thisUser[0].name : thisUser[0].name = req.body.name
@@ -71,10 +61,10 @@ route.put("/:name", asyncHandler((req, res) => {
     })
 }))
 
-// DELETE /:name
-route.delete("/:name", asyncHandler((req, res) => {
-    const userName = req.params.name;
-    const thisUser = DB.filter(data => data.name.includes(userName))
+// DELETE /:id
+route.delete("/:id", asyncHandler((req, res) => {
+    const userId = req.params.id;
+    const thisUser = DB.filter(data => data.createdAt == userId)
 
     DB.forEach((data, i) => {
         if (data.name == thisUser[0].name && data.password == thisUser[0].password) {
