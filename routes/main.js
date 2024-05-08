@@ -9,6 +9,24 @@ function isEmpty(str){
         return false ;
 }
 
+function validation(req, res, next) {
+    const userData = req.body
+
+    let check = []
+
+    if (userData.name.length !== 3) {
+        check.push("이름이 정확하지 않습니다")
+    } if (!userData.email.endsWith("@gmail.com")) {
+        check.push("Gmail이 아닙니다")
+    } if (userData.password.length < 5) {
+        check.push("비밀번호가 5자리보다 작습니다")
+    } if (userData.age.length < 20) {
+        check.push("나이가 유효하지 않습니다")
+    }
+
+    check.length > 0 ? res.send(check) : next()
+}
+
 const DB = [
     {
         name: "admin",
@@ -20,10 +38,8 @@ const DB = [
 ]
 
 // POST /
-route.post("/", asyncHandler((req, res) => {
-    const userData = req.body
-    DB.push(userData)
-
+route.post("/", validation, asyncHandler((req, res) => {
+    DB.push(req.body)
     console.log(DB)
 }))
 

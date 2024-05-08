@@ -6,10 +6,11 @@ function RegisterForm() {
     const [ email, setEmail ] = useState("")
     const [ password, setPassword ] = useState("")
     const [ age, setAge ] = useState("")
-
     let date = new Date()
 
-    const onSubmit = () => {
+    const [ checks, setChecks ] = useState([])
+
+    const onSubmit = async () => {
         const userData = {
             name: username,
             email: email,
@@ -18,13 +19,15 @@ function RegisterForm() {
             createdAt: date.getTime()
         }
 
-        fetch("http://localhost:4000/user", {
+        const res = await fetch("http://localhost:4000/user", {
             method: "post", 
             headers: {
                 "content-type": "application/json",
             },
             body: JSON.stringify(userData),
         })
+        const resChecks = await res.text()
+        setChecks(JSON.parse(resChecks))
 
         setName("")
         setEmail("")
@@ -39,6 +42,11 @@ function RegisterForm() {
             <input name="password" type="password" placeholder="비밀번호" value={password} onChange={ (e) => setPassword(e.target.value) } />
             <input name="age" type="text" placeholder="나이" value={age} onChange={ (e) => setAge(e.target.value) } />
             <button onClick={ onSubmit }>확인</button>
+            {
+                checks.map(check => {
+                    <p>{ check }</p>
+                })
+            }
         </div>
     )
 }
